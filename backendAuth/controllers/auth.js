@@ -172,9 +172,11 @@ async function logLoginAttempt(status, account, data) {
     // console.log(signedTx);
     // console.log(signedTx.rawTransaction);
 
-    await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
-    
+    const trxn = await web3.eth.sendSignedTransaction(signedTx.rawTransaction);
+    if(trxn)
       return true;
+
+    return false;
     
   } catch (error) {
     console.error("Error logging login attempt:", error);
